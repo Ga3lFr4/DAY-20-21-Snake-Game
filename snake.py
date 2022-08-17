@@ -9,6 +9,7 @@ DOWN = 270
 LEFT = 180
 RIGHT = 0
 
+snake_color = turtle.textinput("Snake color", "Please chose skin color (white, green, yellow, orange)")
 
 class Snake:
     def __init__(self):
@@ -22,7 +23,7 @@ class Snake:
 
     def add_segment(self, position):
         segment = Turtle("square")
-        segment.color("white")
+        segment.color(snake_color)
         segment.penup()
         segment.goto(position)
         self.segments.append(segment)
@@ -52,3 +53,12 @@ class Snake:
     def right(self):
         if self.head.heading() != LEFT:
             self.head.setheading(RIGHT)
+
+    def go_to_opposite(self, coor):
+        if coor == "x":
+            new_x = - self.head.xcor()
+            new_y = self.head.ycor()
+        elif coor == "y":
+            new_x = self.head.xcor()
+            new_y = - self.head.ycor()
+        self.head.goto(new_x, new_y)
