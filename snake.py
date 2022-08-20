@@ -9,7 +9,7 @@ DOWN = 270
 LEFT = 180
 RIGHT = 0
 
-snake_color = turtle.textinput("Snake color", "Please chose skin color (white, green, yellow, orange)")
+#snake_color = turtle.textinput("Snake color", "Please chose skin color (white, green, yellow, orange)")
 
 class Snake:
     def __init__(self):
@@ -23,13 +23,20 @@ class Snake:
 
     def add_segment(self, position):
         segment = Turtle("square")
-        segment.color(snake_color)
+        segment.color("white")
         segment.penup()
         segment.goto(position)
         self.segments.append(segment)
 
     def extend(self):
         self.add_segment(self.segments[-1].position())
+
+    def reset_snake(self):
+        for segment in self.segments:
+            segment.hideturtle()
+        self.segments.clear()
+        self.create_snake()
+        self.head = self.segments[0]
 
     def move(self):
         for i in range(len(self.segments) - 1, 0, -1):
